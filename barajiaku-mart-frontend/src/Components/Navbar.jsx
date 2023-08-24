@@ -1,40 +1,40 @@
 import {
-    Box,
-    Flex,
-    Avatar,
-    HStack,
-    IconButton,
-    Button,
-    Menu,
-    MenuButton,
-    useDisclosure,
-    useColorModeValue,
-    Stack,
-    Heading,
-    useColorMode,
-  } from '@chakra-ui/react'
-  import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
-  import { MoonIcon, SunIcon } from '@chakra-ui/icons'
-  import { Link } from 'react-router-dom'
-  
-  
-  const Links = [{title : 'Home',id : 1, to : '/'}, {title : 'About Us',id : 2, to : '/about'}, {title : 'Contact',id : 3, to : '/contact',},{title : 'Products',id : 4, to : '/product',},{title : "Cart",id:5,to:"/cart"}]
-  const Links2 = [{title : 'Login',id : 1, to : '/login'}, {title : 'Signup',id : 2, to : '/signup'},]
-  
-  const NavLink = (props) => {
-    const { children } = props
-    return (
-      <Link
-        as="a"
-        px={2}
-        py={1}
-        rounded={'md'}
-        _hover={{
-          textDecoration: 'none',
-          bg: useColorModeValue('gray.200', 'gray.700'),
-        }}
-        to={children.to}>
-        <Button
+  Box,
+  Flex,
+  Avatar,
+  HStack,
+  IconButton,
+  Button,
+  Menu,
+  MenuButton,
+  useDisclosure,
+  useColorModeValue,
+  Stack,
+  Heading,
+  useColorMode,
+} from '@chakra-ui/react'
+import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
+import { MoonIcon, SunIcon } from '@chakra-ui/icons'
+import { Link } from 'react-router-dom'
+
+
+const Links = [{ title: 'Home', id: 1, to: '/' }, { title: 'About Us', id: 2, to: '/about' }, { title: 'Contact', id: 3, to: '/contact', }, { title: 'Products', id: 4, to: '/product', }, { title: "Cart", id: 5, to: "/cart" }]
+const Links2 = [{ title: 'Login', id: 1, to: '/login' }, { title: 'Signup', id: 2, to: '/signup' },]
+const Link3 = [{ title: 'Beacame A Seller', id: 1, to: '/seller' }];
+const NavLink = (props) => {
+  const { children } = props
+  return (
+    <Link
+      as="a"
+      px={2}
+      py={1}
+      rounded={'md'}
+      _hover={{
+        textDecoration: 'none',
+        bg: useColorModeValue('gray.200', 'gray.700'),
+      }}
+      to={children.to}>
+      <Button
         mt={1}
         w={'full'}
         bg={'blue.200'}
@@ -45,83 +45,95 @@ import {
           boxShadow: 'lg',
         }}
         textStyle={"bold"}
-        >
+      >
         {children.title}
-        </Button>
-      </Link>
-    )
-  }
-  
-  export default function Navbar() {
-    const { colorMode, toggleColorMode } = useColorMode()
-    const { isOpen, onOpen, onClose } = useDisclosure()
-  
-    return (
-      <>
-        <Box  bg={useColorModeValue('gray.100', 'gray.900')} px={4} position={'fixed'} width={'100%'} zIndex={110}>
-          <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
-            <IconButton
-              size={'md'}
-              icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-              aria-label={'Open Menu'}
-              display={{ md: 'none' }}
-              onClick={isOpen ? onClose : onOpen}
-            />
-            <HStack spacing={8} alignItems={'center'}>
-              <Heading><Link to={'/'}>𝐵𝒶𝓇𝒶𝒿𝒾𝒶𝓀𝓊𝓇 𝑀𝒶𝓇𝓉</Link></Heading>
-              <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
-                {Links.map((el)=>
-                  <NavLink key={el.id} >{el}</NavLink>
-                  )}
-              </HStack>
-              <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
-                {Links2.map((el)=>
-                  <NavLink key={el.id} >{el}</NavLink>
-                  )}
-              </HStack>
+      </Button>
+    </Link>
+  )
+}
+
+export default function Navbar() {
+  const { colorMode, toggleColorMode } = useColorMode()
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
+  return (
+    <>
+      <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4} position={'fixed'} width={'100%'} zIndex={110}>
+        <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
+          <IconButton
+            size={'md'}
+            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+            aria-label={'Open Menu'}
+            display={{ md: 'none' }}
+            onClick={isOpen ? onClose : onOpen}
+          />
+          <HStack spacing={8} alignItems={'center'}>
+            <Heading><Link to={'/'}>𝐵𝒶𝓇𝒶𝒿𝒾𝒶𝓀𝓊𝓇 𝑀𝒶𝓇𝓉</Link></Heading>
+            <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
+              {Links.map((el) =>
+                <NavLink key={el.id} >{el}</NavLink>
+              )}
             </HStack>
-            <Button onClick={toggleColorMode}>
-                  {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
-                </Button>
-            <Flex alignItems={'center'}>
-              
-              <Menu>
-                <MenuButton
-                  as={Button}
-                  rounded={'full'}
-                  variant={'link'}
-                  cursor={'pointer'}
-                  minW={0}>
-                  <Avatar
-                    size={'sm'}
-                    src={
-                      'https://img.icons8.com/?size=512&id=uSHYbs6PJfMT&format=png'
-                    }
-                  />
-                </MenuButton>
-              </Menu>
-            </Flex>
+            <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
+              {Links2.map((el) =>
+                <NavLink key={el.id} >{el}</NavLink>
+              )}
+              {Link3.map((el)=>
+                <NavLink key={el.id}>{el}</NavLink>
+                )}
+            </HStack>
+          </HStack>
+          <Button onClick={toggleColorMode}>
+            {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+          </Button>
+          <Flex alignItems={'center'}>
+
+            <Menu>
+              <MenuButton
+                as={Button}
+                rounded={'full'}
+                variant={'link'}
+                cursor={'pointer'}
+                minW={0}>
+                <Avatar
+                  size={'sm'}
+                  src={
+                    'https://img.icons8.com/?size=512&id=uSHYbs6PJfMT&format=png'
+                  }
+                />
+              </MenuButton>
+            </Menu>
           </Flex>
-  
-          {isOpen ? (
-            <Box pb={4} display={{ md: 'none' }}>
-              <Stack as={'nav'} spacing={4}>
-                {Links.map((link) => (
-                  <NavLink key={link}>{link}</NavLink>
-                ))}
-              </Stack>
-            </Box>
-          ) : null}
-          {isOpen ? (
-            <Box pb={4} display={{ md: 'none' }}>
-              <Stack as={'nav'} spacing={4}>
-                {Links2.map((link) => (
-                  <NavLink key={link}>{link}</NavLink>
-                ))}
-              </Stack>
-            </Box>
-          ) : null}
-        </Box>
-      </>
-    )
-  }
+        </Flex>
+
+        {isOpen ? (
+          <Box pb={4} display={{ md: 'none' }}>
+            <Stack as={'nav'} spacing={4}>
+              {Links.map((link) => (
+                <NavLink key={link}>{link}</NavLink>
+              ))}
+            </Stack>
+          </Box>
+        ) : null}
+        {isOpen ? (
+          <Box pb={4} display={{ md: 'none' }}>
+            <Stack as={'nav'} spacing={4}>
+              {Links2.map((link) => (
+                <NavLink key={link}>{link}</NavLink>
+              ))}
+            </Stack>
+          </Box>
+        ) : null}
+        {isOpen ? (
+          <Box pb={4} display={{ md: 'none' }}>
+            <Stack as={'nav'} spacing={4}>
+              {Link3.map((link) => (
+                <NavLink key={link}>{link}</NavLink>
+              ))}
+            </Stack>
+          </Box>
+        ) : null}
+      </Box>
+    </>
+  )
+}

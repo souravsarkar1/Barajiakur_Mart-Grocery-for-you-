@@ -1,11 +1,11 @@
 import axios from "axios";
-import { BACKFROMLOGINFAIL, BACKFROMSIGNUPFAIL, LOGINEQUEST, LOGINFAIL, LOGINSUCESS, SIGNUPFAIL, SIGNUPREQUEST, SIGNUPSUCESS } from "./actionTypes"
+import { SELLERBACKFROMLOGINFAIL, SELLERBACKFROMSIGNUPFAIL, SELLERLOGINEQUEST, SELLERLOGINFAIL, SELLERLOGINSUCESS, SELLERSIGNUPFAIL, SELLERSIGNUPREQUEST, SELLERSIGNUPSUCESS } from "./actionTypes"
 
-export const signup = (formData,toast)=>(dispatch)=>{
-    dispatch({type : SIGNUPREQUEST});
-   return axios.post(`https://barajiakurmartbe.onrender.com/user/register`,formData).then((res)=>{
+export const sellerSignup = (formData,toast)=>(dispatch)=>{
+    dispatch({type : SELLERSIGNUPREQUEST});
+   return axios.post(`https://barajiakurmartbe.onrender.com/seller/register`,formData).then((res)=>{
         console.log(res.data);
-        dispatch({type : SIGNUPSUCESS});
+        dispatch({type : SELLERSIGNUPSUCESS});
         toast({
           title: res.data.msg === "New user has been added" ? "Account created." : 'Email is already registered',
           description: res.data.msg + " please login with that account",
@@ -16,7 +16,7 @@ export const signup = (formData,toast)=>(dispatch)=>{
         })
       }).catch((err)=>{
         console.log(err.message);
-        dispatch({type : SIGNUPFAIL})
+        dispatch({type : SELLERSIGNUPFAIL})
         toast({
           title: 'Request Fail',
           description: "Something Went To Wrong!!",
@@ -29,15 +29,15 @@ export const signup = (formData,toast)=>(dispatch)=>{
       })
 }
 
-export const  signupErrorHandeling = ()=>(dispatch)=>{
-    dispatch({type : BACKFROMSIGNUPFAIL})
+export const  sellerSignupErrorHandeling = ()=>(dispatch)=>{
+    dispatch({type : SELLERBACKFROMSIGNUPFAIL})
 }
 
 
-export const login = (data,toast)=>(dispatch)=>{
-    dispatch({type : LOGINEQUEST});
-   return axios.post(`https://barajiakurmartbe.onrender.com/user/login`,data).then((res)=>{
-        dispatch({type : LOGINSUCESS , payload : res.data.token })
+export const sellerLogin = (data,toast)=>(dispatch)=>{
+    dispatch({type : SELLERLOGINEQUEST});
+   return axios.post(`https://barajiakurmartbe.onrender.com/seller/login`,data).then((res)=>{
+        dispatch({type : SELLERLOGINSUCESS , payload : res.data.token })
 
         console.log(res.data);
 
@@ -50,7 +50,7 @@ export const login = (data,toast)=>(dispatch)=>{
             position : "top"
           })
     }).catch((err)=>{
-        dispatch({type : LOGINFAIL});
+        dispatch({type : SELLERLOGINFAIL});
         console.log(err);
         toast({
             title: 'Request Fail',
@@ -62,6 +62,6 @@ export const login = (data,toast)=>(dispatch)=>{
           })
     })
 }
-export const  loginErrorHandeling = ()=>(dispatch)=>{
-  dispatch({type : BACKFROMLOGINFAIL})
+export const  sellerLoginErrorHandeling = ()=>(dispatch)=>{
+  dispatch({type : SELLERBACKFROMLOGINFAIL})
 }

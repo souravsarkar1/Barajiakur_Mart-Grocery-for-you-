@@ -13,9 +13,9 @@ import {
 } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
-import { login } from '../../Redux/Authencation/action';
 import ButtonLoader from '../../Loader/ButtonLoader';
 import { Link, useNavigate } from 'react-router-dom';
+import { sellerLogin } from '../../Redux/SellerAuthentication/action';
 
 
 function Login() {
@@ -24,8 +24,8 @@ function Login() {
     pass: '',
   });
   const dispatch = useDispatch();
-  const loginisLoading = useSelector(st => st.authReducer.loginisLoading);
-  const isError = useSelector(st => st.authReducer.loginisError);
+  const loginisLoading = useSelector(st => st.sellerAuthReducer.loginisLoading);
+  const isError = useSelector(st => st.sellerAuthReducer.loginisError);
 
   const navigate = useNavigate();
   const toast = useToast();
@@ -41,7 +41,7 @@ function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     //console.log('Form data:', formData);
-    const loginResponse = await dispatch(login(formData, toast));
+    const loginResponse = await dispatch(sellerLogin(formData, toast));
     if (loginResponse && !isError) {
       navigate('/');
     }

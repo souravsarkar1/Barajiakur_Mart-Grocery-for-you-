@@ -1,4 +1,4 @@
-import { BACKFROMLOGINFAIL, BACKFROMSIGNUPFAIL, LOGINEQUEST, LOGINFAIL, LOGINSUCESS, SIGNUPFAIL, SIGNUPREQUEST, SIGNUPSUCESS } from "./actionTypes";
+import { SELLERBACKFROMLOGINFAIL, SELLERBACKFROMSIGNUPFAIL, SELLERLOGINEQUEST, SELLERLOGINFAIL, SELLERLOGINSUCESS, SELLERSIGNUPFAIL, SELLERSIGNUPREQUEST, SELLERSIGNUPSUCESS } from "./actionTypes";
 
 const initialState = {
     signupisLoading: false,
@@ -11,21 +11,21 @@ const initialState = {
 
 export const reducer = (state = initialState, { type, payload }) => {
     switch (type) {
-        case SIGNUPREQUEST:
+        case SELLERSIGNUPREQUEST:
             return { ...state, signupisLoading: true };
-        case SIGNUPSUCESS:
+        case SELLERSIGNUPSUCESS:
             return { ...state, signupisLoading: false }
-        case SIGNUPFAIL:
+        case SELLERSIGNUPFAIL:
             return { ...state, signupisLoading: false, signupisError: true };
-        case BACKFROMSIGNUPFAIL:
+        case SELLERBACKFROMSIGNUPFAIL:
             return { ...state, signupisError: false };
-        case BACKFROMLOGINFAIL:
+        case SELLERBACKFROMLOGINFAIL:
             return { ...state, loginisError: false };
-        case LOGINEQUEST:
+        case SELLERLOGINEQUEST:
             return { ...state, loginisLoading: true };
-        case LOGINSUCESS:
+        case SELLERLOGINSUCESS:
             return { ...state, loginisLoading: false, isAuth: true, token: payload }
-        case LOGINFAIL:
+        case SELLERLOGINFAIL:
             return { ...state, loginisLoading: false, loginisError: true }
         default:
             return state;

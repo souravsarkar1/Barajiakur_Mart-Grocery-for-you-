@@ -6,6 +6,8 @@ import SignUp from '../Pages/Authentication/Signup'
 import AboutUsPage from '../Pages/About/About'
 import ContactFormWithSocialButtons from '../Pages/Contact/Contack'
 import ErrorPage from '../ErrorHandeling/ErrorHandeling'
+import Products from '../Pages/Products/Products'
+import ProductForm from '../Pages/Products/AddProducts'
 //import Checkout from '../Pages/Checkout/Checkout'
 //import PaymentForm from '../Pages/Payment/Payment'
 
@@ -19,6 +21,8 @@ const AllRoutes = () => {
       <Route path='/about' element={<AboutUsPage/>}/>
       <Route path='/contact' element={<ContactFormWithSocialButtons/>}/>
       <Route path='/error' element={<ErrorPage/>}/>
+      <Route path='/product' element={<Products/>}/>
+      <Route path='/adddata' element={<ProductForm/>}/>
       </Routes>
     </div>
   )

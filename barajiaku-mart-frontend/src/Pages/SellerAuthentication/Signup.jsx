@@ -13,10 +13,10 @@ import {
 } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
-import { signup, signupErrorHandeling } from '../../Redux/Authencation/action';
 import ButtonLoader from '../../Loader/ButtonLoader';
 import { Link, useNavigate } from 'react-router-dom';
 import ErrorPage from '../../ErrorHandeling/ErrorHandeling';
+import { sellerSignup, sellerSignupErrorHandeling } from '../../Redux/SellerAuthentication/action';
 //import { useRef } from 'react';
 //import axios from 'axios';
 
@@ -31,8 +31,8 @@ function SignUp() {
   });
   const toast = useToast();
   const dispatch = useDispatch();
-  const signupisLoading = useSelector(st => st.authReducer.signupisLoading);
-  const isError = useSelector(st => st.authReducer.signupisError);
+  const signupisLoading = useSelector(st => st.sellerAuthReducer.signupisLoading);
+  const isError = useSelector(st => st.sellerAuthReducer.signupisError);
   const navigate = useNavigate();
   //const ref = useRef(null);
   //console.log(isLoading);
@@ -47,7 +47,7 @@ function SignUp() {
     event.preventDefault();
     // You can add form submission logic here
     const handleErrorEvent = () => {
-      dispatch(signupErrorHandeling());
+      dispatch(sellerSignupErrorHandeling());
     }
     console.log('Form data:', formData);
     console.log(validatePassword(formData.pass));
@@ -74,7 +74,7 @@ function SignUp() {
 
     }
     else {
-      dispatch(signup(formData, toast)).then((res) => {
+      dispatch(sellerSignup(formData, toast)).then((res) => {
         setTimeout(() => {
           if (isError) {
             return <ErrorPage event={handleErrorEvent} />

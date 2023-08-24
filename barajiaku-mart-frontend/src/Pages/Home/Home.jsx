@@ -5,6 +5,7 @@ import useResizeObserver from 'use-resize-observer';
 import Home2 from './Home2';
 import Home3 from './Home3';
 import Footer from './Footer';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   const { ref, width = 1, height = 200 } = useResizeObserver(); // Create a ref
@@ -30,6 +31,7 @@ const Home = () => {
 
   return (
     <div>
+    <Link to={'/adddata'}>addnewdata</Link>
       <div ref={ref}>
         <SimpleImageSlider
           width={width}

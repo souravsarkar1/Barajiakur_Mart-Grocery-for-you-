@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'; // If you're using React Router for nav
 
 
 function ErrorPage({event}) {
-  
+  console.log(event);
   return (
     <ChakraProvider>
       <Box
