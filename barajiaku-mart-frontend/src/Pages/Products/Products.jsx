@@ -4,24 +4,33 @@ import { getData } from '../../Redux/Data/action';
 import ProductCard from '../../Components/Products/ProductCard';
 
 import { Center, Grid, ChakraProvider } from '@chakra-ui/react'; // Import ChakraProvider
+import ProductLoader from '../../Loader/ProductLoader';
 
 const Products = () => {
   // Get token from Redux state
-  const token = useSelector(state => state.authReducer.token);
+ // const token = useSelector(state => state.authReducer.token);
   
   // Get data from Redux state
   const data = useSelector(state => state.dataReducer.data);
+  const getDataisLoading = useSelector(state => state.dataReducer.getDataisLoading);
   
   const dispatch = useDispatch();
   
   // Fetch data when the component mounts
   useEffect(() => {
     // Dispatch the action to get data using the token
-    dispatch(getData(token));
-  }, [dispatch, token]);
+    dispatch(getData());
+  }, [dispatch]);
   
   console.log(data);
+  if (getDataisLoading) {
   
+    return (
+      <Center margin={{ base: 'auto', md: '200px auto 0px auto' }}>
+      <ProductLoader/>
+      </Center>
+    )
+  }
   return (
     <ChakraProvider> {/* Wrap your content in ChakraProvider */}
       <div style={{ padding: '2rem' }}>

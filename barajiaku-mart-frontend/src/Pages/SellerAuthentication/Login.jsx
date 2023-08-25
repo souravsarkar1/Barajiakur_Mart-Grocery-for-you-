@@ -14,11 +14,11 @@ import {
 import { motion } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
 import ButtonLoader from '../../Loader/ButtonLoader';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { sellerLogin } from '../../Redux/SellerAuthentication/action';
 
 
-function Login() {
+function SellerLogin() {
   const [formData, setFormData] = useState({
     email: '',
     pass: '',
@@ -28,6 +28,7 @@ function Login() {
   const isError = useSelector(st => st.sellerAuthReducer.loginisError);
 
   const navigate = useNavigate();
+  const location = useLocation();
   const toast = useToast();
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -38,17 +39,20 @@ function Login() {
   };
   console.log(isError);
   
-  const handleSubmit = async (event) => {
+  const handleSubmit =  (event) => {
     event.preventDefault();
-    //console.log('Form data:', formData);
-    const loginResponse = await dispatch(sellerLogin(formData, toast));
-    if (loginResponse && !isError) {
-      navigate('/');
-    }
+  
+    console.log('Submitting login form...');
+  
+     dispatch(sellerLogin(formData, toast)).then((res)=>{
+      navigate(location.state);      
+     })
+   // console.log('Login response:', loginResponse);
+  
+   
   };
-  if (isError) {
-    navigate('/error')
-  }
+  
+  
   return (
     <Center height="100vh">
       <Box p={6} width="300px" textAlign="center">
@@ -63,7 +67,7 @@ function Login() {
           width="100%"
         >
           <Heading as="h2" size="lg" mb={4}>
-            Login
+          Login as Seller ✌️
           </Heading>
           <form onSubmit={handleSubmit}>
             <Stack spacing={4}>
@@ -104,7 +108,7 @@ function Login() {
           <Text mt={4} textAlign="center">
             😃 {`Don't have an account?`}{' '}
             <Text as="span" color="teal.500">
-              <Link to={'/signup'}>Create a new Account</Link>
+              <Link to={'/seller/signup'}>Create a new Account</Link>
             </Text>
           </Text>
         </motion.div>
@@ -113,4 +117,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default SellerLogin;

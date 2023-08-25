@@ -15,7 +15,7 @@ import { motion } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../Redux/Authencation/action';
 import ButtonLoader from '../../Loader/ButtonLoader';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 
 function Login() {
@@ -29,6 +29,7 @@ function Login() {
 
   const navigate = useNavigate();
   const toast = useToast();
+  const location = useLocation();
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({
@@ -43,7 +44,7 @@ function Login() {
     //console.log('Form data:', formData);
     const loginResponse = await dispatch(login(formData, toast));
     if (loginResponse && !isError) {
-      navigate('/');
+      navigate(location.state);
     }
   };
   if (isError) {

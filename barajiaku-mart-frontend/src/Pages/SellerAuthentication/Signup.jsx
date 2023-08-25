@@ -20,7 +20,7 @@ import { sellerSignup, sellerSignupErrorHandeling } from '../../Redux/SellerAuth
 //import { useRef } from 'react';
 //import axios from 'axios';
 
-function SignUp() {
+function SellerSignUp() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -124,7 +124,7 @@ function SignUp() {
           width="100%"
         >
           <Heading mb={4} size="lg" textAlign="center">
-            Sign Up
+            Sign Up as seller 👍
           </Heading>
           <form onSubmit={handleSubmit}>
             <Grid templateColumns={{ base: '1fr', md: '1fr 1fr' }} gap={4}>
@@ -191,7 +191,7 @@ function SignUp() {
           <Text mt={4} textAlign="center">
             😃 Already have an account?{' '}
             <Text as="span" color="teal.500">
-              <Link to={'/login'}> Log in here</Link>
+              <Link to={'/seller/login'}> Log in here</Link>
             </Text>
           </Text>
         </motion.div>
@@ -200,4 +200,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default SellerSignUp;

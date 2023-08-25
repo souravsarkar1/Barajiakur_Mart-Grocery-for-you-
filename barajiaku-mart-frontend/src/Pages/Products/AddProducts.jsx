@@ -11,6 +11,7 @@ import {
   Checkbox,
 } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
+import ButtonLoader from '../../Loader/ButtonLoader';
 
 function ProductForm() {
   const [formData, setFormData] = useState({
@@ -23,8 +24,8 @@ function ProductForm() {
     rating: 0,
   });
 
-  const token = useSelector(state => state.authReducer.token);
-
+  const token = useSelector(state => state.sellerAuthReducer.token);
+  const [isLoding,setLoading] = useState(false);
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({
@@ -35,15 +36,16 @@ function ProductForm() {
 
   const handleCheckboxChange = (event) => {
     const { name, checked } = event.target;
+   
     setFormData((prevData) => ({
       ...prevData,
       [name]: checked,
     }));
   };
-
+console.log(token);
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    setLoading(true);
     try {
       const response = await axios.post(
         'https://barajiakurmartbe.onrender.com/data/add',
@@ -66,8 +68,10 @@ function ProductForm() {
         stock: false,
         rating: 0,
       });
+      setLoading(false);
     } catch (error) {
       console.error('Error posting data:', error);
+      setLoading(false);
     }
   };
 
@@ -108,7 +112,7 @@ function ProductForm() {
             </FormControl>
           </Grid>
           <Button type="submit" colorScheme="teal" mt={4} w="70%">
-            Submit
+           {isLoding ? <ButtonLoader height={"40px"} width={"40"}/> : "Submit"}
           </Button>
         </form>
       </Box>

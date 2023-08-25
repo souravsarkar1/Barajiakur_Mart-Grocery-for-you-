@@ -1,5 +1,6 @@
 import axios from "axios";
 import { SELLERBACKFROMLOGINFAIL, SELLERBACKFROMSIGNUPFAIL, SELLERLOGINEQUEST, SELLERLOGINFAIL, SELLERLOGINSUCESS, SELLERSIGNUPFAIL, SELLERSIGNUPREQUEST, SELLERSIGNUPSUCESS } from "./actionTypes"
+import Cookies from "js-cookie";
 
 export const sellerSignup = (formData,toast)=>(dispatch)=>{
     dispatch({type : SELLERSIGNUPREQUEST});
@@ -38,7 +39,7 @@ export const sellerLogin = (data,toast)=>(dispatch)=>{
     dispatch({type : SELLERLOGINEQUEST});
    return axios.post(`https://barajiakurmartbe.onrender.com/seller/login`,data).then((res)=>{
         dispatch({type : SELLERLOGINSUCESS , payload : res.data.token })
-
+          Cookies.set('sellerToken',res.data.token);
         console.log(res.data);
 
         toast({
