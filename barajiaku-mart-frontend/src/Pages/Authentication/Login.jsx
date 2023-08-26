@@ -30,6 +30,7 @@ function Login() {
   const navigate = useNavigate();
   const toast = useToast();
   const location = useLocation();
+  
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({

@@ -16,6 +16,7 @@ import { SellerPrivateRoute } from './SellerPrivateRoute'
 import SingleProductPage from '../Pages/Products/SingleProductPage'
 import Multistep from '../Pages/Payment/Payment'
 import Checkout from '../Pages/Cart/Checkout'
+import {PrivateRoute} from './PrivateRoutes'
 //import Checkout from '../Pages/Cart/Checkout'
 //import Checkout from '../Pages/Checkout/Checkout'
 //import PaymentForm from '../Pages/Payment/Payment'
@@ -31,7 +32,7 @@ const AllRoutes = () => {
       <Route path='/contact' element={<ContactFormWithSocialButtons/>}/>
       <Route path='/error' element={<ErrorPage/>}/>
       <Route path='/product' element={<Products/>}/>
-      <Route path='/product/:id' element = {<SingleProductPage/>}/>
+      <Route path='/product/:id' element = {<PrivateRoute><SingleProductPage/></PrivateRoute>}/>
       <Route path='/adddata' element={<SellerPrivateRoute><ProductForm/></SellerPrivateRoute>}/>
       <Route path='/seller' element={<SellerHome/>}/>
       <Route path='/myproducts' element={<SellerPrivateRoute><MyProduct/></SellerPrivateRoute>}/>

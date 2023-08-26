@@ -16,10 +16,12 @@ import {
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
 import { MoonIcon, SunIcon } from '@chakra-ui/icons'
 import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { logoutButtonHandeling } from '../Redux/Authencation/action'
 
 
 const Links = [{ title: 'Home', id: 1, to: '/' }, { title: 'About Us', id: 2, to: '/about' }, { title: 'Contact', id: 3, to: '/contact', }, { title: 'Products', id: 4, to: '/product', }, { title: "Cart", id: 5, to: "/cart" }]
-const Links2 = [{ title: 'Login', id: 1, to: '/login' }, { title: 'Signup', id: 2, to: '/signup' },]
+const Links2 = [{ title: 'Login', id: 1, to: '/login' }]
 const Link3 = [{ title: 'Beacame A Seller', id: 1, to: '/seller' }];
 const NavLink = (props) => {
   const { children } = props
@@ -53,9 +55,17 @@ const NavLink = (props) => {
 }
 
 export default function Navbar() {
+  const isAuth = useSelector(st=>st.authReducer.isAuth);
+  console.log(isAuth);
   const { colorMode, toggleColorMode } = useColorMode()
   const { isOpen, onOpen, onClose } = useDisclosure()
-
+  const dispatch = useDispatch();
+const handleLogout = ()=>{
+  setTimeout(() => {
+    dispatch(logoutButtonHandeling());
+  }, 2000);
+  
+}
   return (
     <>
       <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4} position={'fixed'} width={'100%'} zIndex={110}>
@@ -75,7 +85,14 @@ export default function Navbar() {
               )}
             </HStack>
             <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
-              {Links2.map((el) =>
+              {isAuth ? <Button colorScheme='red' onClick={handleLogout}  mt={1}
+              w={'full'}
+              rounded={'md'}
+              _hover={{
+                transform: 'translateY(-2px)',
+                boxShadow: 'lg',
+              }}
+              textStyle={"bold"}>Logout</Button> : Links2.map((el) =>
                 <NavLink key={el.id} >{el}</NavLink>
               )}
               {Link3.map((el)=>
@@ -118,7 +135,14 @@ export default function Navbar() {
         {isOpen ? (
           <Box pb={4} display={{ md: 'none' }}>
             <Stack as={'nav'} spacing={4}>
-              {Links2.map((link) => (
+              {isAuth ? <Button colorScheme='red' onClick={handleLogout}  mt={1}
+              w={'full'}
+              rounded={'md'}
+              _hover={{
+                transform: 'translateY(-2px)',
+                boxShadow: 'lg',
+              }}
+              textStyle={"bold"}>Logout</Button> : Links2.map((link) => (
                 <NavLink key={link}>{link}</NavLink>
               ))}
             </Stack>

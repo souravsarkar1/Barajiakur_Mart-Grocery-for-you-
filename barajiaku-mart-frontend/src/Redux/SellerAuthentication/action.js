@@ -1,5 +1,5 @@
 import axios from "axios";
-import { SELLERBACKFROMLOGINFAIL, SELLERBACKFROMSIGNUPFAIL, SELLERLOGINEQUEST, SELLERLOGINFAIL, SELLERLOGINSUCESS, SELLERSIGNUPFAIL, SELLERSIGNUPREQUEST, SELLERSIGNUPSUCESS } from "./actionTypes"
+import { SELLERBACKFROMLOGINFAIL, SELLERBACKFROMSIGNUPFAIL, SELLERLOGINEQUEST, SELLERLOGINFAIL, SELLERLOGINSUCESS, SELLERLOGOUTSUCESSFUL, SELLERSIGNUPFAIL, SELLERSIGNUPREQUEST, SELLERSIGNUPSUCESS } from "./actionTypes"
 import Cookies from "js-cookie";
 
 export const sellerSignup = (formData,toast)=>(dispatch)=>{
@@ -65,4 +65,8 @@ export const sellerLogin = (data,toast)=>(dispatch)=>{
 }
 export const  sellerLoginErrorHandeling = ()=>(dispatch)=>{
   dispatch({type : SELLERBACKFROMLOGINFAIL})
+}
+
+export const sellerLogout =()=>(dispatch)=>{
+  dispatch({type : SELLERLOGOUTSUCESSFUL});
 }

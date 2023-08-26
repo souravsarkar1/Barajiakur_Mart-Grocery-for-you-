@@ -1,4 +1,4 @@
-import { BACKFROMLOGINFAIL, BACKFROMSIGNUPFAIL, LOGINEQUEST, LOGINFAIL, LOGINSUCESS, SIGNUPFAIL, SIGNUPREQUEST, SIGNUPSUCESS } from "./actionTypes";
+import { BACKFROMLOGINFAIL, BACKFROMSIGNUPFAIL, LOGINEQUEST, LOGINFAIL, LOGINSUCESS, LOGOUTSUCESSFUL, SIGNUPFAIL, SIGNUPREQUEST, SIGNUPSUCESS } from "./actionTypes";
 
 const initialState = {
     signupisLoading: false,
@@ -27,6 +27,8 @@ export const reducer = (state = initialState, { type, payload }) => {
             return { ...state, loginisLoading: false, isAuth: true, token: payload }
         case LOGINFAIL:
             return { ...state, loginisLoading: false, loginisError: true }
+            case LOGOUTSUCESSFUL : 
+            return {...state,isAuth : false,loginisLoading : false,loginisError : false,token : ""};
         default:
             return state;
     }

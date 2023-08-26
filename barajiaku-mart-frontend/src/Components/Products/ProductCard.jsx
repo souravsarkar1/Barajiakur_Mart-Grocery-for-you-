@@ -103,7 +103,10 @@ const addToCart = ()=>{
         </Flex>
       </Box>
       <Grid templateColumns={{ base: '1fr', md: '1fr 1fr' }} gap={4}>
-      <Button colorScheme={'pink'}><Link to={`/product/${_id}`}>See More!</Link></Button>
+      <Button colorScheme='teal'><Link to={`/product/${_id}` }  style={{
+        textDecoration: 'none',     // Remove underline
+        color: 'inherit',          // Prevent default color change on hover
+      }}>See More!</Link></Button>
       <Button colorScheme='blue' onClick={addToCart}>{loader ? <ButtonLoader height={"40px"} width={"40px"}/> : "Add To Cart"}</Button>
       </Grid>
     </Box>

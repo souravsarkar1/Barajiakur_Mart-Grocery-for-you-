@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Box,
   Button,
@@ -15,7 +15,7 @@ import { motion } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
 import ButtonLoader from '../../Loader/ButtonLoader';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { sellerLogin } from '../../Redux/SellerAuthentication/action';
+import { sellerLogin, sellerLogout } from '../../Redux/SellerAuthentication/action';
 
 
 function SellerLogin() {
@@ -38,7 +38,9 @@ function SellerLogin() {
     }));
   };
   console.log(isError);
-  
+  useEffect(()=>{
+    dispatch(sellerLogout());
+  },[dispatch])
   const handleSubmit =  (event) => {
     event.preventDefault();
   
