@@ -2,6 +2,7 @@ import { Heading, Thead, Tr, Th, Td, Table, Skeleton, Image, Box, Grid, Button }
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const MyProduct = () => {
   const [data, setData] = useState([]);
@@ -111,7 +112,10 @@ const MyProduct = () => {
                   <Td>
                     <Grid>
                       <Button onClick={() => handleDelete(el._id)} colorScheme='red'>Delete</Button>
-                      <Button onClick={() => handleUpdate(el._id)} colorScheme='blue'>Edit</Button>
+                      <Button onClick={() => handleUpdate(el._id)} colorScheme='blue'><Link style={{
+                        textDecoration: 'none',     // Remove underline
+                        color: 'inherit',          // Prevent default color change on hover
+                      }} to={`/myproducts/${el._id}`}>Edit</Link></Button>
                     </Grid>
                   </Td>
                 </Tr>

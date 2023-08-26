@@ -165,7 +165,7 @@ export default function Checkou() {
                 <p>
                   <strong>Expected shipping delivery</strong>
                 </p>
-                <p className="mb-0">{`${day + 3}-${month}-${year}`}- {`${day + 8}-${month}-${year}`}</p>
+                <p className="mb-0">{`${day}-${month}-${year}`} + 72 Hours</p>
               </MDBCardBody>
             </MDBCard>
 

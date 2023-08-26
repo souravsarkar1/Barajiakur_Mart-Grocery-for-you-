@@ -21,10 +21,15 @@ import {
 } from '@chakra-ui/react'
 
 import { useToast } from '@chakra-ui/react'
+import { useNavigate } from 'react-router-dom'
 
 const Form1 = () => {
   const [show, setShow] = useState(false)
-  const handleClick = () => setShow(!show)
+  const handleClick = () => setShow(!show);
+  const [fisetName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [cardNumber, setCardNumber] = useState("");
+  const [cvv, setCvv] = useState("");
   return (
     <>
       <Heading w="100%" textAlign={'center'} fontWeight="normal" mb="2%">
@@ -35,21 +40,21 @@ const Form1 = () => {
           <FormLabel htmlFor="first-name" fontWeight={'normal'}>
             First name
           </FormLabel>
-          <Input id="first-name" placeholder="First name" />
+          <Input id="first-name" placeholder="First name" value={fisetName} onChange={(e) => setFirstName(e.target.value)} />
         </FormControl>
 
         <FormControl>
           <FormLabel htmlFor="last-name" fontWeight={'normal'}>
             Last name
           </FormLabel>
-          <Input id="last-name" placeholder="First name" />
+          <Input id="last-name" placeholder="First name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
         </FormControl>
       </Flex>
       <FormControl mt="2%">
         <FormLabel htmlFor="number" fontWeight={'normal'}>
           Card Number
         </FormLabel>
-        <Input id="number" type="number" />
+        <Input id="number" type="number" value={cardNumber} onChange={(e) => setCardNumber(e.target.value)} />
       </FormControl>
 
       <FormControl>
@@ -61,6 +66,8 @@ const Form1 = () => {
             pr="4.5rem"
             type={show ? 'number' : 'password'}
             placeholder="Enter cvv"
+            value={cvv}
+            onChange={(e) => setCvv(e.target.value)}
           />
           <InputRightElement width="4.5rem">
             <Button h="1.75rem" size="sm" onClick={handleClick}>
@@ -73,7 +80,11 @@ const Form1 = () => {
   )
 }
 
-const Form2 = () => {
+const Form2 = ({ country, setCountry, streetAddress, setStreetAddress, city, setCity, stateProvince, setStateProvince, postalCode, setPostalCode }) => {
+
+
+
+
   return (
     <>
       <Heading w="100%" textAlign={'center'} fontWeight="normal" mb="2%">
@@ -99,7 +110,10 @@ const Form2 = () => {
           shadow="sm"
           size="sm"
           w="full"
-          rounded="md">
+          rounded="md"
+          value={country}
+          onChange={(e) => setCountry(e.target.value)}
+        >
           <option>India</option>
           <option>United States</option>
           <option>Canada</option>
@@ -129,6 +143,8 @@ const Form2 = () => {
           size="sm"
           w="full"
           rounded="md"
+          value={streetAddress}
+          onChange={(e) => setStreetAddress(e.target.value)}
         />
       </FormControl>
 
@@ -154,6 +170,8 @@ const Form2 = () => {
           size="sm"
           w="full"
           rounded="md"
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
         />
       </FormControl>
 
@@ -179,6 +197,8 @@ const Form2 = () => {
           size="sm"
           w="full"
           rounded="md"
+          value={stateProvince}
+          onChange={(e) => setStateProvince(e.target.value)}
         />
       </FormControl>
 
@@ -204,13 +224,16 @@ const Form2 = () => {
           size="sm"
           w="full"
           rounded="md"
+          value={postalCode}
+          onChange={(e) => setPostalCode(e.target.value)}
         />
       </FormControl>
     </>
   )
 }
 
-const Form3 = () => {
+const Form3 = ({ opt, setOtp }) => {
+
   return (
     <>
       <Heading w="100%" textAlign={'center'} fontWeight="normal">
@@ -228,7 +251,7 @@ const Form3 = () => {
               color: 'gray.50',
             }}
             mt="2%">
-            OTP 
+            OTP
           </FormLabel>
           <Input
             type="text"
@@ -240,6 +263,7 @@ const Form3 = () => {
             size="sm"
             w="full"
             rounded="md"
+            onChange={(e) => setOtp(e.target.value)}
           />
         </FormControl>
         <FormControl id="email" mt={1}>
@@ -274,7 +298,21 @@ export default function Multistep() {
   const toast = useToast()
   const [step, setStep] = useState(1)
   const [progress, setProgress] = useState(33.33)
-
+  const [otp, setOtp] = useState();
+  const navigate = useNavigate();
+  const [country, setCountry] = useState('');
+  const [streetAddress, setStreetAddress] = useState('');
+  const [city, setCity] = useState('');
+  const [stateProvince, setStateProvince] = useState('');
+  const [postalCode, setPostalCode] = useState('');
+const checkingFunctin = ()=>{
+  if (!country || !streetAddress || !city || !stateProvince || !postalCode) {
+    return true;
+  }
+  else{
+    return false
+  }
+}
   return (
     <>
       <Box
@@ -286,7 +324,7 @@ export default function Multistep() {
         m="10px auto"
         as="form">
         <Progress hasStripe value={progress} mb="5%" mx="5%" isAnimated></Progress>
-        {step === 1 ? <Form1 /> : step === 2 ? <Form2 /> : <Form3 />}
+        {step === 1 ? <Form1 /> : step === 2 ? <Form2 country={country} setCountry={setCountry} streetAddress={streetAddress} setStreetAddress={setStreetAddress} postalCode={postalCode} setPostalCode={setPostalCode} city={city} setCity={setCity} stateProvince={stateProvince} setStateProvince={setStateProvince} /> : <Form3 opt={otp} setOtp={setOtp} />}
         <ButtonGroup mt="5%" w="100%">
           <Flex w="100%" justifyContent="space-between">
             <Flex>
@@ -324,14 +362,39 @@ export default function Multistep() {
                 colorScheme="red"
                 variant="solid"
                 onClick={() => {
-                  toast({
-                    title: 'Payment Sucessful!',
-                    description: "Your product will delevery as soon as possible",
-                    status: 'success',
-                    duration: 3000,
-                    isClosable: true,
-                    position: "top"
-                  })
+                  if(checkingFunctin()){
+                    toast({
+                      title: 'Payment Not Sucessful!',
+                      description: "Plase Enter a Valid OTP!",
+                      status: 'error',
+                      duration: 3000,
+                      isClosable: true,
+                      position: "top"
+                    })
+                  }
+                 else if (otp === "1234") {
+                    toast({
+                      title: 'Payment Sucessful!',
+                      description: "Your product will delevery as soon as possible",
+                      status: 'success',
+                      duration: 3000,
+                      isClosable: true,
+                      position: "top"
+                    })
+                    setTimeout(() => {
+                      navigate('/')
+                    }, 2000);
+                  } else {
+                    toast({
+                      title: 'Payment Not Sucessful!',
+                      description: "Plase Enter a Valid OTP!",
+                      status: 'error',
+                      duration: 3000,
+                      isClosable: true,
+                      position: "top"
+                    })
+                  }
+
                 }}>
                 Submit
               </Button>

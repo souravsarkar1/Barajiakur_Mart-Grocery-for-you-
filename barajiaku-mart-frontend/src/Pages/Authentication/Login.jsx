@@ -25,6 +25,7 @@ function Login() {
   });
   const dispatch = useDispatch();
   const loginisLoading = useSelector(st => st.authReducer.loginisLoading);
+  const isAuth = useSelector(st => st.authReducer.isAuth);
   const isError = useSelector(st => st.authReducer.loginisError);
 
   const navigate = useNavigate();
@@ -48,6 +49,9 @@ function Login() {
       navigate(location.state);
     }
   };
+  if(isAuth){
+    navigate(location.state);
+  }
   if (isError) {
     navigate('/error')
   }

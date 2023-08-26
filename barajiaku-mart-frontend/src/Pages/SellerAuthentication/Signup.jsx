@@ -80,7 +80,7 @@ function SellerSignUp() {
             return <ErrorPage event={handleErrorEvent} />
           }
           else {
-            navigate('/login');
+            navigate('/seller/login');
           }
         }, 2000);
       })
