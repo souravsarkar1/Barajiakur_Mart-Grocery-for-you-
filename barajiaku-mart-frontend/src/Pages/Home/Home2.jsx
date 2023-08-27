@@ -13,6 +13,7 @@ import {
   Grid,
   GridItem,
 } from '@chakra-ui/react'
+import { Link } from 'react-router-dom'
 
 
 const carddeteals = [
@@ -32,8 +33,10 @@ export default function Home2() {
   return (
     <Box bg={useColorModeValue('gray.100', 'gray.700')}>
     <Container maxW={'7xl'} py={16}>
+   
       <Grid templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)', lg: 'repeat(6, 1fr)' }} gap={6} m={'auto'}>
         {carddeteals.map((el) => (
+          <Link to={'/product'}>
           <GridItem key={el.title}>
             <Box maxW={'270px'} w={'full'} boxShadow={'2xl'} rounded={'md'} overflow={'hidden'} m={'auto'}>
               <Image h={'120px'} w={'full'} src={el.img} objectFit="cover" alt="#" />
@@ -60,8 +63,10 @@ export default function Home2() {
               </Box>
             </Box>
           </GridItem>
+          </Link>
         ))}
       </Grid>
+     
     </Container>
   </Box>
   )

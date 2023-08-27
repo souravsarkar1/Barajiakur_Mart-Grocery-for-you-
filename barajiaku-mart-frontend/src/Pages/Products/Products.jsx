@@ -26,7 +26,7 @@ const Products = () => {
   if (getDataisLoading) {
   
     return (
-      <Center margin={{ base: '200px auto auto auto', md: '200px auto auto auto' }}>
+      <Center margin={{ base: '200px auto 200px auto', md: '200px auto 200px auto' }}>
       <ProductLoader/>
       </Center>
     )

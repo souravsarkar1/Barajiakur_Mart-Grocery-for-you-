@@ -4,7 +4,8 @@ import SimpleImageSlider from 'react-simple-image-slider';
 import useResizeObserver from 'use-resize-observer';
 import Home2 from './Home2';
 import Home3 from './Home3';
-import Footer from './Footer';
+import Home4 from './Home4';
+//import Footer from './Footer';
 //import { Link } from 'react-router-dom';
 
 const Home = () => {
@@ -54,7 +55,7 @@ const Home = () => {
       </div>
       <Home3 />
       <Home2 />
-      <Footer/>
+      <Home4/>
     </div>
   );
 };

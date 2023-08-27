@@ -13,6 +13,7 @@ import {
   createIcon,
   useColorModeValue,
 } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
 
 export default function CallToActionWithVideo() {
   return (
@@ -37,17 +38,15 @@ export default function CallToActionWithVideo() {
                 bg: 'red.400',
                 zIndex: -1,
               }}>
-              Write once,
+             Be Digital
             </Text>
             <br />
             <Text as={'span'} color={'red.400'}>
-              use everywhere!
+             Being Upgraded!
             </Text>
           </Heading>
           <Text color={'gray.500'} maxW={'3xl'}>
-            Snippy is a rich coding snippets app that lets you create your own code
-            snippets, categorize them, and even sync them in the cloud so you can use them
-            anywhere. All that is free!
+            {`In the age of digital transformation, convenience has become paramount, and at Barajiakur-Mart, we've made it our mission to bring that convenience right to your doorstep. With our main office nestled in the heart of Barajakur, Shantipur, Nadia, we are not just a grocery store; we are your partner in simplifying your everyday life.`}
           </Text>
           <Stack spacing={{ base: 4, sm: 6 }} direction={{ base: 'column', sm: 'row' }}>
             <Button
@@ -58,7 +57,10 @@ export default function CallToActionWithVideo() {
               colorScheme={'red'}
               bg={'red.400'}
               _hover={{ bg: 'red.500' }}>
-              Get started
+             <Link style={{
+              textDecoration: 'none',     // Remove underline
+              color: 'inherit',          // Prevent default color change on hover
+            }} to={'/product'}>Get started</Link>
             </Button>
             <Button
               rounded={'full'}
